@@ -3,9 +3,12 @@
 </div>
 
 <div class="input-group" style="width:100%">
-  <input type="text" class="form-control" #itemTitle style="width:94%;float:left" placeholder="Enter the new task">
-  <div class="input-group-addon-hover-cursor" style="background:#eeeeee;padding:2px;width:6%;float:right" (click)="onAdd(itemTitle)">
-    <i class="fa fa-plus-circle fa-2x"></i>
+  <input type="text" id="taskInp" class="form-control" #itemTitle placeholder="Enter the new task">
+  <input type="date" id="dateInp" class="form-control" name="" value="" #itemDate>
+  <input type="time" id="timeInp" class="form-control" name="" value="" #itemTime>
+  <div id="addBtn" class="input-group-addon-hover-cursor" (click)="onAdd(itemTitle,itemDate,itemTime)">
+    <!-- <i class="fa fa-plus-circle fa-2x"></i> -->
+    <button type="button" class="btn btn-info form-control">Add Task</button>
   </div>
 </div>
 
@@ -19,6 +22,15 @@
         <i class="fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"></i>
       </span>
       {{item.title}}
+      <span *ngIf="item.date && item.time" style="color:grey; margin-left:10%">
+        Due on {{item.date}} at {{item.time}}
+      </span>
+      <span *ngIf="item.date && !item.time" style="color:grey; margin-left:10%">
+        Due on {{item.date}}
+      </span>
+      <span *ngIf="!item.date && item.time" style="color:grey; margin-left:10%">
+        Due at {{item.time}}
+      </span>
       <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)">
         <i class="fa fa-trash-o fa-lg"></i>
       </span>

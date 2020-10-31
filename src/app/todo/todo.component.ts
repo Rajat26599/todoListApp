@@ -28,9 +28,11 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  onAdd(itemTitle) {
-    this.toDoService.addTitle(itemTitle.value);
+  onAdd(itemTitle, itemDate, itemTime) {
+    this.toDoService.addTitle(itemTitle.value, itemDate.value, itemTime.value);
     itemTitle.value = null;
+    itemDate.value = null;
+    itemTime.value = null;
   }
 
   alterCheck($key:string, isChecked) {
